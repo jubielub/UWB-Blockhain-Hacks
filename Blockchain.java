@@ -53,4 +53,8 @@ public class Blockchain {
 
         return currentBlock;
     }
+    
+    public void testMethod() {
+    	
+    }
 }
