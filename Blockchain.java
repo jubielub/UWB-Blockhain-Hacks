@@ -8,6 +8,7 @@ import java.util.Date;
 public class Blockchain {
 
     private ArrayList<Block> blockchain = new ArrayList<>();
+    private int difficulty;
 
     public Blockchain(){
 
@@ -15,6 +16,7 @@ public class Blockchain {
         this.blockchain.add(new Block(0, "0", 000,
                 "Welcome to Blockchain!", "000dc75a315c77a1f9c98fb6247d03dd18ac52632d7dc6a9920261d8109b37cf",
                 604));
+        difficulty = 3;
     }
 
     public static void main (String[] args) throws NoSuchAlgorithmException {
@@ -49,11 +51,29 @@ public class Blockchain {
         Block currentBlock = new Block(currentIndex, previousHash, currentTimeStamp, data, currentHashTemporary, currentNonce);
         String currentBlockHash = currentBlock.calculateBlockHash(currentBlock);
         currentBlock.hash = currentBlockHash;
-        //System.out.println(currentBlockHash);
         System.out.println(currentBlock.toString(currentBlock));
 
         return currentBlock;
     }
+
+    public boolean isValidHashDifficulty(Block block){
+
+        for(int i = 0; i < block.hash.length(); i++){
+
+            if(!(block.hash.substring(i,i+1).equals("0"))){
+
+                break;
+            }
+
+            return i >= this.difficulty;
+        }
+
+        return false;
+    }
+
+
+
+
 
 
 }
