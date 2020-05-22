@@ -1,4 +1,3 @@
-package com.company;
 
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
@@ -11,11 +10,11 @@ public class Block {
     int index;
     String previousHash;
     long timestamp;
-    String data; //change the type of this variable to suit what data we ask from the user
+    Data data; //change the type of this variable to suit what data we ask from the user
     String hash;
     int nonce;
 
-    public Block(int index, String previousHash, long timeStamp, String data,
+    public Block(int index, String previousHash, long timeStamp, Data data,
                     String hash, int nonce){
 
             this.index = index;
@@ -74,7 +73,7 @@ public class Block {
         return this.timestamp;
     }
 
-    public String getData(){
+    private Data getData(){
 
         return this.data;
     }
@@ -89,8 +88,9 @@ public class Block {
         return this.nonce;
     }
 
-    public void setData(String data) {
+    //to do 
+    public void setData(Data data) {
 
-        this.data = data;
+        
     }
 }

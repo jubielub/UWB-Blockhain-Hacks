@@ -36,6 +36,9 @@ public class Data {
 	// how old patient is
 	private int age = -1;
 
+	// name
+	private String name = "Default";
+
 	// gender of patient
 	private Gender gender = Gender.DEFAULT;
 
@@ -43,15 +46,17 @@ public class Data {
 		System.out.println("No data points exist for this patient. Please add data points.");
 	}
 
-	public Data(int healthPlan, int height, double weight, int age, Gender gender) {
+	public Data(int healthPlan, int height, double weight, int age, Gender gender, String name) {
 		setHealthPlan(healthPlan);
 		setHeight(height);
 		setWeight(weight);
 		setAge(age);
 		setGender(gender);
+		setName(name);
 	}
-	
-	public Data(GeneralHealth genHealth, int healthPlan, boolean smoke100, int height, double weight, double desiredWeight, int age, Gender gender) {
+
+	public Data(GeneralHealth genHealth, int healthPlan, boolean smoke100, int height, double weight,
+			double desiredWeight, int age, Gender gender, String name) {
 		setGenHealth(genHealth);
 		setHealthPlan(healthPlan);
 		setSmoke100(smoke100);
@@ -60,6 +65,11 @@ public class Data {
 		setDesiredWeight(desiredWeight);
 		setAge(age);
 		setGender(gender);
+		setName(name);
+	}
+
+	public Data(String name) {
+		setName(name);
 	}
 
 	public GeneralHealth getGenHealth() {
@@ -165,9 +175,23 @@ public class Data {
 		if (gender != Gender.DEFAULT) {
 			this.gender = gender;
 		}
-		
+
 		else {
 			System.out.println("Error: Invalid gender information given. Setting to default, DEFAULT");
+		}
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		if (!name.isBlank()) {
+			this.name = name;
+		}
+		
+		else {
+			System.out.println("Error: Invalid gender information given. Setting to default, Default");
 		}
 	}
 

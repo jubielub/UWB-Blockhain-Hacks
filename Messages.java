@@ -1,5 +1,3 @@
-package com.company;
-
 enum MessageType
 {
     REQUEST_LATEST_BLOCK, RECEIVE_LATEST_BLOCK,
