@@ -37,15 +37,15 @@ public class Blockchain {
     }
 
 
-    //called in the main class or messages class
+     //called in the main class or messages class
     public Block generateNextBlock(Data data) throws NoSuchAlgorithmException {
 
-        int currentIndex = (this.blockchain.size() - 1) + 1;
-        String previousHash = (this.blockchain.get(this.blockchain.size() - 1)).hash;
+        int currentIndex = this.getLatestBlock().index + 1;
+        String previousHash = this.getLatestBlock().hash;
         long currentTimeStamp = new Date().getTime();
         int currentNonce = 0; //not sure about this
-        String currentHashTemporary = "0";
 
+        String currentHashTemporary = "0";
         Block currentBlock = new Block(currentIndex, previousHash, currentTimeStamp, data, currentHashTemporary, currentNonce);
         String currentBlockHash = currentBlock.calculateBlockHash(currentBlock);
         currentBlock.hash = currentBlockHash;
