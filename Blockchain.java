@@ -3,11 +3,14 @@ package com.company;
 import netscape.javascript.JSObject;
 
 import javax.crypto.Cipher;
+import java.io.UnsupportedEncodingException;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Blockchain {
 
@@ -41,6 +44,25 @@ public class Blockchain {
     }
 
 
+    //called in the main class or messages class
+    public Block generateNextBlock(String data) throws NoSuchAlgorithmException {
+
+        int currentIndex = (this.blockchain.size() - 1) + 1;
+        String previousHash = (this.blockchain.get(this.blockchain.size() - 1)).hash;
+        long currentTimeStamp = new Date().getTime();
+        int currentNonce = 0; //not sure about this
+        String currentHashTemporary = "0";
+
+        Block currentBlock = new Block(currentIndex, previousHash, currentTimeStamp, data, currentHashTemporary, currentNonce);
+        String currentBlockHash = currentBlock.calculateBlockHash(currentBlock);
+        currentBlock.hash = currentBlockHash;
+        //System.out.println(currentBlockHash);
+        System.out.println(currentBlock.toString(currentBlock));
+
+        return currentBlock;
+    }
+
+    /*
     public String calculateHashForBlock(Block currentBlock) throws NoSuchAlgorithmException {
 
         System.out.println(this.calculateHash(currentBlock.index, currentBlock.previousHash,
@@ -55,7 +77,6 @@ public class Blockchain {
 
         MessageDigest digest = MessageDigest.getInstance("SHA-256");
         byte[] encodedhash = digest.digest(preiousHash.getBytes(StandardCharsets.UTF_8));
-        System.out.println(encodedhash);
         return bytesToHex(encodedhash);
 
     }
@@ -74,21 +95,11 @@ public class Blockchain {
         return hexString.toString();
     }
 
-    //called in the main class or messages class
-    public Block generateNextBlock(String data) throws NoSuchAlgorithmException {
+     */
 
-        int currentIndex = (this.blockchain.size() - 1) + 1;
-        String previousHash = (this.blockchain.get(this.blockchain.size() - 1)).hash;
-        long currentTimeStamp = new Date().getTime();
-        int currentNonce = 0; //not sure about this
-        String currentHash = this.calculateHash(currentIndex, previousHash, currentTimeStamp, data, currentNonce);
 
-        Block currentBlock = currentBlock = new Block(currentIndex, previousHash, currentTimeStamp, data, currentHash, currentNonce);
-        System.out.println(currentHash);
 
-        return currentBlock;
-    }
-
+    /*
     public boolean isValidNextBlock(Block nextBlock, Block previousBlock) throws NoSuchAlgorithmException {
 
         String nextBlockHash = this.calculateHashForBlock(nextBlock);
