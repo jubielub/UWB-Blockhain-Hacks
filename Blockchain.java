@@ -69,7 +69,7 @@ public class Blockchain {
         return false;
     }
     
-    public void accesBlock(String patientData) {
+    public void accessBlock(String patientData) {
     	
     }
 }
