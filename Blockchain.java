@@ -11,40 +11,51 @@ import java.util.Date;
 
 public class Blockchain {
 
-    private Block blockchain[];
-    int currentBlockNumber;
+    private ArrayList<Block> blockchain = new ArrayList<>();
 
     public Blockchain(){
 
         //the zeroeth block is the genesis block
-        this.blockchain[0] = new Block(0, "0", 000,
+        this.blockchain.add(new Block(0, "0", 000,
                 "Welcome to Blockchain!", "000dc75a315c77a1f9c98fb6247d03dd18ac52632d7dc6a9920261d8109b37cf",
-                604);
+                604));
     }
 
-    public Block[] getBlockChain(){
+    public static void main (String[] args) throws NoSuchAlgorithmException {
+
+        Blockchain chain = new Blockchain();
+        Block newBlock1 = chain.generateNextBlock("hill");
+        chain.getBlockChain().add(newBlock1);
+        Block newBlock2 = chain.generateNextBlock("bye");
+        chain.getBlockChain().add(newBlock2);
+    }
+
+    public ArrayList<Block> getBlockChain(){
 
         return this.blockchain;
     }
 
     public Block getLatestBlock(){
 
-        return this.blockchain[this.blockchain.length - 1];
+        return this.blockchain.get(this.blockchain.size() - 1);
     }
 
 
     public String calculateHashForBlock(Block currentBlock) throws NoSuchAlgorithmException {
+
+        System.out.println(this.calculateHash(currentBlock.index, currentBlock.previousHash,
+                currentBlock.timestamp, currentBlock.data, currentBlock.nonce));
 
         return this.calculateHash(currentBlock.index, currentBlock.previousHash,
                 currentBlock.timestamp, currentBlock.data, currentBlock.nonce);
     }
 
 
-
     public String calculateHash(int index, String preiousHash, long timeStamp, String data, int nonce) throws NoSuchAlgorithmException {
 
         MessageDigest digest = MessageDigest.getInstance("SHA-256");
         byte[] encodedhash = digest.digest(preiousHash.getBytes(StandardCharsets.UTF_8));
+        System.out.println(encodedhash);
         return bytesToHex(encodedhash);
 
     }
@@ -63,14 +74,19 @@ public class Blockchain {
         return hexString.toString();
     }
 
-    public void generateNextBlock(String data) throws NoSuchAlgorithmException {
+    //called in the main class or messages class
+    public Block generateNextBlock(String data) throws NoSuchAlgorithmException {
 
-        int nextIndex = this.blockchain[this.blockchain.length - 1].index + 1;
-        String previousHash = this.blockchain[this.blockchain.length - 1].hash;
-        long timeStamp = new Date().getTime();
-        int nonce = 0; //not sure about this
-        String nextHash = this.calculateHash(nextIndex, previousHash, timeStamp, data, nonce);
+        int currentIndex = (this.blockchain.size() - 1) + 1;
+        String previousHash = (this.blockchain.get(this.blockchain.size() - 1)).hash;
+        long currentTimeStamp = new Date().getTime();
+        int currentNonce = 0; //not sure about this
+        String currentHash = this.calculateHash(currentIndex, previousHash, currentTimeStamp, data, currentNonce);
 
+        Block currentBlock = currentBlock = new Block(currentIndex, previousHash, currentTimeStamp, data, currentHash, currentNonce);
+        System.out.println(currentHash);
+
+        return currentBlock;
     }
 
     public boolean isValidNextBlock(Block nextBlock, Block previousBlock) throws NoSuchAlgorithmException {
