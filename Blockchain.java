@@ -53,23 +53,4 @@ public class Blockchain {
 
         return currentBlock;
     }
-
-    public boolean isValidHashDifficulty(Block block){
-
-        for(int i = 0; i < block.hash.length(); i++){
-
-            if(!(block.hash.substring(i,i+1).equals("0"))){
-
-                break;
-            }
-
-            return i >= this.difficulty;
-        }
-
-        return false;
-    }
-    
-    public void accesBlock(String patientData) {
-    	
-    }
 }
