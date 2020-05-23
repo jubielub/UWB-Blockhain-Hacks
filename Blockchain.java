@@ -57,7 +57,7 @@ public class Blockchain {
     
     public String accessData(String name, String hash) {
     	for (Block block: blockchain) {
-    		if (block.hash.equals(hash) && block.data.getName().equals(hash)) {
+    		if (block.hash.equals(hash) && block.data.getName().equals(name)) {
     			return block.toString();
     		}
     	}
