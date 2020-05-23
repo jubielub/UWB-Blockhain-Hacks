@@ -30,7 +30,7 @@ function App(){
   let _contact;
 
   if(showContact !== "/contact"){
-    _contact = (<li><Link to = '/contact'>Contact Me</Link></li>)
+    _contact = (<li><Link to = '/contact'>Contact Us</Link></li>)
 
   }
 
@@ -39,7 +39,7 @@ function App(){
       <div className="container">
         <nav>
           <ul>
-            <li><Link to ="/">Trekker</Link></li>
+            <li><Link to ="/">Healthcare Portal</Link></li>
           </ul>
           <ul>
             {_contact}
