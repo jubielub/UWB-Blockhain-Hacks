@@ -1,66 +1,43 @@
 
 public class Data {
 
-	public enum GeneralHealth {
-		POOR, AVERAGE, GOOD, EXCELLENT, DEFAULT
-	}
-
-	public enum Gender {
-		FEMALE, MALE, OTHER, DEFAULT
-	}
-
-	// all data points are initialized to default values to avoid null/empty data
-	// points
-
 	// indicator for their general health
-	private GeneralHealth genHealth = GeneralHealth.DEFAULT;
+	private GeneralHealth genHealth;
 
 	// what insurance plan they are on
-	private int healthPlan = -1;
-
-	// keeps track if the default smoke is the default value or not
-	private boolean defaultSmoke100 = true;
+	private int healthPlan;
 
 	// if they smoked at least 100 cigarettes in a month
-	private boolean smoke100 = false;
+	private boolean smoke100;
 
 	// height of patient in inches
-	private int height = -1;
+	private int height;
 
 	// weight of patient in lbs
-	private double weight = -1;
+	private double weight;
 
 	// patient's desired weight
-	private double desiredWeight = -1;
+	private double desiredWeight;
 
 	// how old patient is
-	private int age = -1;
+	private int age;
 
 	// name
-	private String name = "Default";
+	private String name;
 	
 	
 	// password
-	private String password = "Default";
+	private String password;
 
 	// gender of patient
-	private Gender gender = Gender.DEFAULT;
+	private Gender gender;
 
-	public Data(String name, String password) {
-		System.out.println("No data points exist for this patient. Please add data points.");
-	}
-
-	public Data(int healthPlan, int height, double weight, int age, Gender gender, String name) {
-		setHealthPlan(healthPlan);
-		setHeight(height);
-		setWeight(weight);
-		setAge(age);
-		setGender(gender);
-		setName(name);
-	}
+//	public Data(String name, String password) {
+//		System.out.println("No data points exist for this patient. Please add data points.");
+//	}
 
 	public Data(GeneralHealth genHealth, int healthPlan, boolean smoke100, int height, double weight,
-			double desiredWeight, int age, Gender gender, String name) {
+			double desiredWeight, int age, Gender gender, String name, String password) {
 		setGenHealth(genHealth);
 		setHealthPlan(healthPlan);
 		setSmoke100(smoke100);
@@ -70,6 +47,7 @@ public class Data {
 		setAge(age);
 		setGender(gender);
 		setName(name);
+		setPassword(password);
 	}
 
 	public Data(String name) {
@@ -112,7 +90,6 @@ public class Data {
 
 	public void setSmoke100(boolean smoke100) {
 		this.smoke100 = smoke100;
-		this.defaultSmoke100 = false;
 	}
 
 	public int getHeight() {
@@ -215,8 +192,8 @@ public class Data {
 	}
 	
 	public String toString() {
-		return "\nName: " + this.name + "\nGender: " + this.gender + "\nAge: " + this.age + this.height + "\nWeight: " + this.weight + "\nDesired weight: " + 
-				this.desiredWeight + "General Health: " + this.genHealth + "\nHealth Plan: " + this.healthPlan + "\nSmoke 100: " + this.smoke100 +
-				"\nHeight: ";
+		return "\nName: " + this.name + "\nGender: " + this.gender + "\nAge: " + this.age + "\nHeight: " + this.height + "\nWeight: " + this.weight + 
+				"\nDesired weight: " + this.desiredWeight + "General Health: " + this.genHealth + "\nHealth Plan: " + this.healthPlan + "\nSmoke 100: " 
+				+ this.smoke100;
 	}
 }

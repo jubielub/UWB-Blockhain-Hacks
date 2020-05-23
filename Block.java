@@ -7,94 +7,108 @@ import java.util.logging.Logger;
 
 public class Block implements Cloneable {
 
-    int index;
-    String previousHash;
-    long timestamp;
-    Data data; //change the type of this variable to suit what data we ask from the user
-    String hash;
-    int nonce;
+	int index;
+	String previousHash;
+	long timestamp;
+	Data data; // change the type of this variable to suit what data we ask from the user
+	String hash;
+	int nonce;
 
-    public Block(int index, String previousHash, long timeStamp, Data data,
-                    String hash, int nonce){
+	public Block(int index, String previousHash, long timeStamp, Data data, String hash, int nonce) {
 
-            this.index = index;
-            this. previousHash = previousHash;
-            this.timestamp = timeStamp;
-            this.data = data;
-            this.hash = hash;
-            this. nonce = nonce;
-    }
-    
-    public Object clone() throws CloneNotSupportedException {
-    	return (Block)super.clone();
-    }
-    
-    public String toString(Block block){
+		this.index = index;
+		this.previousHash = previousHash;
+		this.timestamp = timeStamp;
+		this.data = data;
+		this.hash = hash;
+		this.nonce = nonce;
+	}
 
-        return ("Index: " + block.index + " \n Previous Hash: " + block.previousHash +  " \n TimeStamp: " + block.timestamp +
-                " \n Data: " + block.data + " \n Hash: " + block.hash + " \n Nonce: " + block.nonce);
-    }
+	public Object clone() throws CloneNotSupportedException {
+		return (Block) super.clone();
+	}
 
-    public String calculateBlockHash(Block block){
+	public String toString(Block block) {
 
-        String dataToHash = block.previousHash + block.timestamp + block.nonce + block.data;
-        Logger logger = Logger.getLogger("name");
-        MessageDigest digest = null;
-        byte[] bytes = null;
+		return ("Index: " + block.index + " \n Previous Hash: " + block.previousHash + " \n TimeStamp: "
+				+ block.timestamp + " \n Data: " + block.data + " \n Hash: " + block.hash + " \n Nonce: "
+				+ block.nonce);
+	}
 
-        try {
+	public String calculateBlockHash(Block block) {
 
-            digest = MessageDigest.getInstance("SHA-256");
-            bytes = digest.digest(dataToHash.getBytes(StandardCharsets.UTF_8));
+		String dataToHash = block.previousHash + block.timestamp + block.nonce + block.data;
+		Logger logger = Logger.getLogger("name");
+		MessageDigest digest = null;
+		byte[] bytes = null;
 
-        }catch(NoSuchAlgorithmException ex){
+		try {
 
-            logger.log(Level.SEVERE, ex.getMessage());
-        }
+			digest = MessageDigest.getInstance("SHA-256");
+			bytes = digest.digest(dataToHash.getBytes(StandardCharsets.UTF_8));
 
-        StringBuffer buffer = new StringBuffer();
+		} catch (NoSuchAlgorithmException ex) {
 
-        for(byte b: bytes){
+			logger.log(Level.SEVERE, ex.getMessage());
+		}
 
-            buffer.append(String.format("%2x", b));
-        }
+		StringBuffer buffer = new StringBuffer();
 
-        return buffer.toString();
-    }
+		for (byte b : bytes) {
 
-    public int getIndex(){
+			buffer.append(String.format("%2x", b));
+		}
 
-        return this.index;
-    }
+		return buffer.toString();
+	}
 
-    public String getPreviousHash(){
+	public int getIndex() {
 
-        return this.previousHash;
-    }
+		return this.index;
+	}
 
-    public long getTimestamp(){
+	public String getPreviousHash() {
 
-        return this.timestamp;
-    }
+		return this.previousHash;
+	}
 
-    protected Data getData(){
+	public long getTimestamp() {
 
-        return this.data;
-    }
+		return this.timestamp;
+	}
 
-    public String getHash(){
+	protected Data getData() {
 
-        return this.hash;
-    }
+		return this.data;
+	}
 
-    public int getNonce(){
+	public String getHash() {
 
-        return this.nonce;
-    }
+		return this.hash;
+	}
 
-    //to do 
-    public void setData(Data data) {
+	public int getNonce() {
 
-        
-    }
+		return this.nonce;
+	}
+
+	public void setData(Data data) {
+
+		data = this.data;
+	}
+
+	public Block changeData(Data changedData) {
+
+		// create a new block for the new data to be stored in
+		Block newBlock = null;
+
+		// set the data of the new block to be the changed data
+		newBlock.setData(changedData);
+
+		// based on the changedData, make new hash
+		calculateBlockHash(newBlock);
+
+		return newBlock;
+
+	}
 }
