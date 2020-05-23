@@ -194,5 +194,10 @@ public class Data {
 			System.out.println("Error: Invalid gender information given. Setting to default, Default");
 		}
 	}
-
+	
+	public String toString() {
+		return "General Health: " + this.genHealth + "\nHealth Plan: " + this.healthPlan + "\nSmoke 100: " + this.defaultSmoke100 +
+				"\nHeight: " + this.height + "\nWeight: " + this.weight + "\nDesired weight: " + this.desiredWeight + "\nAge: " + this.age +
+				"\nGender: " + this.gender + "\nName: " + this.name;
+	}
 }
