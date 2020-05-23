@@ -18,7 +18,7 @@ public class Driver {
 		PrintWriter pw = new PrintWriter(bw);
 		
 		// checks file to see if system already has users who previously registered and have their own Block
-		
+		 // use data to create new 
 
 		// Scanner object to take in user input
 		Scanner sc = new Scanner(System.in);
@@ -29,7 +29,7 @@ public class Driver {
 				+ "\nPress any key if you would like to exit.");
 
 		if ("A".equals(sc.next())) {
-			createAccount(sc);
+			createAccount(sc, pw);
 		}
 
 		else if ("B".equals(sc.next())) {
@@ -41,7 +41,7 @@ public class Driver {
 		}
 	}
 	
-	public static Block createAccount(Scanner sc) {
+	public static Block createAccount(Scanner sc, PrintWriter pw) {
 		
 		// all data points are initialized to default values to avoid null/empty data
 		// points
@@ -161,7 +161,7 @@ public class Driver {
 			desiredWeight, age, gender, name, password);
 		
 		writeToPatientInfoFile(genHealth, healthPlan, smoke100, height, weight,
-			desiredWeight, age, gender, name, password);
+			desiredWeight, age, gender, name, password, pw);
 		
 		
 		// adds new Block to Blockchain
@@ -177,8 +177,11 @@ public class Driver {
 	}
 	
 	public static void writeToPatientInfoFile(GeneralHealth genHealth, int healthPlan, boolean smoke100, int height, double weight,
-			double desiredWeight, int age, Gender gender, String name, String password) {
+			double desiredWeight, int age, Gender gender, String name, String password, PrintWriter pw) {
 		
+		//prints patient information to patient information.txt
+		pw.println(genHealth + " " + healthPlan + " " + smoke100 + " " + height + " " + weight + " " + desiredWeight + " " + age + " " + gender + 
+				" " + name + " " + password);
 	}
 
 }
