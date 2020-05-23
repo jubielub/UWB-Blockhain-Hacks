@@ -55,10 +55,11 @@ public class Blockchain {
         return currentBlock;
     }
     
-    public String accessData(String name, String hash) {
+    public Block accessData(String name, String password) {
     	for (Block block: blockchain) {
-    		if (block.hash.equals(hash) && block.data.getName().equals(name)) {
-    			return block.getData().toString();
+    		if (block.getData().getPassword().equals(password) && block.data.getName().equals(name)) {
+    			System.out.println(block.getData());
+    			return block;
     		}
     	}
     	
@@ -76,16 +77,17 @@ public class Blockchain {
         	String newName = input.next();
         	
         	// stores inputed hash into String
-        	System.out.println("Hash:");
-        	String newHash = input.next();
+        	System.out.println("Password:");
+        	String newPassword = input.next();
         	
         	//calls itself to find patient's data
-        	return accessData(newName, newHash);
+        	return accessData(newName, newPassword);
     	}
     	
     	//if user does not want to try to get data again, returns null
     	else {
-    		return "Thank you for using >>>";
+    		System.out.println("Thank you for using ____");
+    		return null;
     	}
     }
 }

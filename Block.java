@@ -5,7 +5,7 @@ import java.security.NoSuchAlgorithmException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class Block {
+public class Block implements Cloneable {
 
     int index;
     String previousHash;
@@ -24,7 +24,11 @@ public class Block {
             this.hash = hash;
             this. nonce = nonce;
     }
-
+    
+    public Object clone() throws CloneNotSupportedException {
+    	return (Block)super.clone();
+    }
+    
     public String toString(Block block){
 
         return ("Index: " + block.index + " \n Previous Hash: " + block.previousHash +  " \n TimeStamp: " + block.timestamp +
