@@ -1,6 +1,7 @@
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.*;
 
 
 public class Blockchain {
@@ -37,7 +38,7 @@ public class Blockchain {
     }
 
 
-     //called in the main class or messages class
+    //called in the main class or messages class
     public Block generateNextBlock(Data data) throws NoSuchAlgorithmException {
 
         int currentIndex = this.getLatestBlock().index + 1;
@@ -54,7 +55,37 @@ public class Blockchain {
         return currentBlock;
     }
     
-    public void testMethod() {
+    public String accessData(String name, String hash) {
+    	for (Block block: blockchain) {
+    		if (block.hash.equals(hash) && block.data.getName().equals(hash)) {
+    			return block.toString();
+    		}
+    	}
     	
+    	Scanner input = new Scanner(System.in);
+    	
+    	//error message printed if invalid credentials given 
+    	System.out.println("Error: invalid name and/or hash given.");
+    	
+    	//checks if user wants to attempt to get data again
+    	System.out.println("Try again? (Y or N)");
+    	if ("Y".equals(input.next())) {
+    		
+    		//stores inputed name in String
+        	System.out.println("Full name:");
+        	String newName = input.next();
+        	
+        	// stores inputed hash into String
+        	System.out.println("Hash:");
+        	String newHash = input.next();
+        	
+        	//calls itself to find patient's data
+        	return accessData(newName, newHash);
+    	}
+    	
+    	//if user does not want to try to get data again, returns null
+    	else {
+    		return null;
+    	}
     }
 }
