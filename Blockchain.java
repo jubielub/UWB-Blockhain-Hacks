@@ -86,7 +86,7 @@ public class Blockchain {
     	
     	//if user does not want to try to get data again, returns null
     	else {
-    		System.out.println("Thank you for using ____");
+    		System.out.println("Thank you for using MedBlock");
     		return null;
     	}
     }
