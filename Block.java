@@ -73,7 +73,7 @@ public class Block {
         return this.timestamp;
     }
 
-    private Data getData(){
+    protected Data getData(){
 
         return this.data;
     }

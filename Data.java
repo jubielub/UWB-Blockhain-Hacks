@@ -38,11 +38,15 @@ public class Data {
 
 	// name
 	private String name = "Default";
+	
+	
+	// password
+	private String password = "Default";
 
 	// gender of patient
 	private Gender gender = Gender.DEFAULT;
 
-	public Data() {
+	public Data(String name, String password) {
 		System.out.println("No data points exist for this patient. Please add data points.");
 	}
 
@@ -80,7 +84,7 @@ public class Data {
 		if (genHealth != GeneralHealth.DEFAULT) {
 			this.genHealth = genHealth;
 		} else {
-			System.out.println("Error: Invalid general health value given. Set to default, DEFAULT");
+			System.out.println("Error: Invalid general health value given. Set to default, DEFAULT123");
 		}
 
 	}
@@ -195,9 +199,24 @@ public class Data {
 		}
 	}
 	
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		if (password.length() > 10) {
+			this.password = password;
+		}
+		
+		//DECIDE WHAT DEFAULT SHOULD BE LATER
+		else {
+			System.out.println("Error: Password not strong enough. Setting to default, Default123");
+		}
+	}
+	
 	public String toString() {
-		return "General Health: " + this.genHealth + "\nHealth Plan: " + this.healthPlan + "\nSmoke 100: " + this.defaultSmoke100 +
-				"\nHeight: " + this.height + "\nWeight: " + this.weight + "\nDesired weight: " + this.desiredWeight + "\nAge: " + this.age +
-				"\nGender: " + this.gender + "\nName: " + this.name;
+		return "\nName: " + this.name + "\nGender: " + this.gender + "\nAge: " + this.age + this.height + "\nWeight: " + this.weight + "\nDesired weight: " + 
+				this.desiredWeight + "General Health: " + this.genHealth + "\nHealth Plan: " + this.healthPlan + "\nSmoke 100: " + this.smoke100 +
+				"\nHeight: ";
 	}
 }

@@ -25,6 +25,7 @@ public class Blockchain {
         chain.getBlockChain().add(newBlock1);
         Block newBlock2 = chain.generateNextBlock(new Data("bye"));
         chain.getBlockChain().add(newBlock2);
+    
     }
 
     public ArrayList<Block> getBlockChain(){
@@ -50,7 +51,6 @@ public class Blockchain {
         Block currentBlock = new Block(currentIndex, previousHash, currentTimeStamp, data, currentHashTemporary, currentNonce);
         String currentBlockHash = currentBlock.calculateBlockHash(currentBlock);
         currentBlock.hash = currentBlockHash;
-        System.out.println(currentBlock.toString(currentBlock));
 
         return currentBlock;
     }
@@ -58,7 +58,7 @@ public class Blockchain {
     public String accessData(String name, String hash) {
     	for (Block block: blockchain) {
     		if (block.hash.equals(hash) && block.data.getName().equals(name)) {
-    			return block.toString();
+    			return block.getData().toString();
     		}
     	}
     	
@@ -85,7 +85,7 @@ public class Blockchain {
     	
     	//if user does not want to try to get data again, returns null
     	else {
-    		return null;
+    		return "Thank you for using >>>";
     	}
     }
 }
